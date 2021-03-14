@@ -18,9 +18,18 @@ export default function App() {
     { itemName: 'Item10', id: '10'},
   ])
 
-  const pressHandler = (id) => {
-    console.log(id);
-  }
+  const getUsers = async () => {
+    try {
+      let response = await fetch(
+        `http://192.168.1.2:8000/api/user/${1}`
+      );
+      let json = await response.json();
+      console.log(json);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <View style={styles.container}>      
       <Header/>
@@ -29,7 +38,7 @@ export default function App() {
           keyExtractor={(item) => item.id}
           data={menuItens}
           renderItem={({item}) => (
-            <TouchableOpacity style={styles.menuItens}onPress={() => pressHandler(item.id)}>
+            <TouchableOpacity style={styles.menuItens}onPress={() => getUsers(item.id)}>
               <Text style={styles.menuItemtext}>{item.itemName} </Text>
             </TouchableOpacity>
           )}
