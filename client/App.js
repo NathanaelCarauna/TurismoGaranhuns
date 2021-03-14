@@ -1,8 +1,26 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, FlatList, TouchableOpacity } from 'react-native';
+import { Alert,StyleSheet, Text, View, FlatList, TouchableOpacity, TextInput } from 'react-native';
 
 export default function App() {
+  clicou = () =>{
+    Alert.alert("TurismoGaranhuns Login")
+  }
+    return(
+      <View style={styles.container}>
+        <TextInput style = {styles.input}
+          placeholder = "Digite seu email"/>      
+        <TextInput style={styles.input}
+          secureTextEntry ={true}
+          placeholder= "Digite sua senha"/> 
+        <TouchableOpacity style={styles.botao}
+          onPress={()=>{this.clicou()}}>
+          <Text>Login</Text>
+        </TouchableOpacity>
+      </View>)
+    
+  }
+  /*
   const [name, setName] = useState('Turismo APP');
   const [menuItens, setMenuItens] = useState([
     { itemName: 'Item1', id: '1'},
@@ -42,7 +60,7 @@ export default function App() {
       <StatusBar style="auto" />
     </View>
   );
-}
+}*/
 
 const styles = StyleSheet.create({
   // Main start
@@ -52,6 +70,33 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  input:{
+    marginTop: 10,
+    padding: 10,
+    width:300,
+    backgroundColor:'#fff',
+    fontSize:16,
+    fontWeight:'bold',
+    borderRadius:3,
+  },
+  botao:{
+    width:300,
+    height:42,
+    backgroundColor:'#fff',
+    marginTop: 10,
+    borderRadius:4,
+    alignItems:'center',
+    justifyContent:'center',
+
+  },
+  botaoText:{
+    fontSize:16,
+    fontWeight:'bold',
+    color: 'black'
+
+  }
+  
+  /*
   header: {
     backgroundColor: '#213967',        
     width: '100%',
@@ -86,6 +131,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 24,
     fontWeight: 'bold',
-  },
+    */
+},
   //Main menu end
-});
+)
