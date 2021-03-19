@@ -2,9 +2,8 @@ import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
 import { Alert,StyleSheet, Text, View, FlatList, TouchableOpacity, TextInput } from 'react-native';
 
-export default function App() {
-  const clicou = () =>{
-    Alert.alert("TurismoGaranhuns Login")
+export default function Login() {
+  
   }
     return(
       <View style={styles.container}>
@@ -13,19 +12,18 @@ export default function App() {
         <TextInput style={styles.input}
           secureTextEntry ={true}
           placeholder= "Digite sua senha"/> 
-        <TouchableOpacity style={styles.botao}
-          onPress={()=>{this.clicou()}}>
+        <TouchableOpacity style={styles.botao}>
           <Text>Login</Text>
         </TouchableOpacity>
       </View>)
     
-  }
+  
 
   const styles = StyleSheet.create({
     // Main start
     container: {
       flex: 1,
-      backgroundColor: '#DFDBD2',
+      backgroundColor: '#213967',
       alignItems: 'center',
       justifyContent: 'center',
     },
@@ -53,5 +51,14 @@ export default function App() {
       fontWeight:'bold',
       color: 'black'
   
+    },
+    input:{
+        marginTop: 10,
+        padding: 10,
+        width:300,
+        backgroundColor:'#fff',
+        fontSize:16,
+        fontWeight:'bold',
+        borderRadius:3,
     }
   })
