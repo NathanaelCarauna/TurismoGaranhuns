@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
-import { Alert,StyleSheet, Text, View, FlatList, TouchableOpacity, TextInput } from 'react-native';
+import { Alert,StyleSheet, Text, View, FlatList, TouchableOpacity, TextInput,Button } from 'react-native';
 
 export default function Login() {
   
@@ -15,6 +15,12 @@ export default function Login() {
         <TouchableOpacity style={styles.botao}>
           <Text>Login</Text>
         </TouchableOpacity>
+        <Button
+          title="Start"
+          onPress={() =>
+            this.props.navigation.navigate('Start')
+          }
+        />
       </View>)
     
   

@@ -1,15 +1,19 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity,Alert,FlatList,TextInput, KeyboardAvoidingView } from 'react-native';
+import { render } from 'react-dom';
+import { StyleSheet, Text, View, Button,Alert,FlatList,TextInput, KeyboardAvoidingView, OnPress } from 'react-native';
+import Login from './login';
 
 
 export default function Start() {
-  
  return(
       <View style={styles.container}>
-        <TouchableOpacity style={styles.botao}>
-        <Text>Login</Text>
-        </TouchableOpacity>
+        <Button style={styles.botao}
+          title="Login"
+          onPress={() =>
+            this.props.navigation.navigate(Login)
+          }
+        />
         
         <TouchableOpacity style={styles.botao}>
           <Text>Cadastre-se</Text>
