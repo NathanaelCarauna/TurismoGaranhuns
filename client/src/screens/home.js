@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
-import { Text, View, FlatList, TouchableOpacity } from 'react-native';
+import React, { useState, useContext } from 'react';
+import { Text, View, FlatList, TouchableOpacity, StyleSheet } from 'react-native';
 import { global } from '../styles/global';
 import Header from '../components/header';
+import AuthContext from '../contexts/auth';
 
 
 export default function Home() {
@@ -11,35 +12,25 @@ export default function Home() {
         { itemName: 'Item2', id: '2' },
         { itemName: 'Item3', id: '3' },
         { itemName: 'Item4', id: '4' },
-        { itemName: 'Item5', id: '5' },
-        { itemName: 'Item6', id: '6' },
-        { itemName: 'Item7', id: '7' },
-        { itemName: 'Item8', id: '8' },
-        { itemName: 'Item9', id: '9' },
-        { itemName: 'Item10', id: '10' },
     ])
 
-    const getUsers = async () => {
-        try {
-            let response = await fetch(
-                `http://192.168.1.2:8000/api/user/${1}`
-            );
-            let json = await response.json();
-            console.log(json);
-        } catch (error) {
-            console.error(error);
-        }
-    };
+    const {signOut } = useContext(AuthContext);
+    function handleSignOut() {
+        signOut();
+    }
 
     return (
         <View style={global.container}>
             <Header />
+            <TouchableOpacity style={styles.botao} onPress={handleSignOut}>
+                <Text>Logout</Text>
+            </TouchableOpacity>
             <View style={global.body}>
                 <FlatList
                     keyExtractor={(item) => item.id}
                     data={menuItens}
                     renderItem={({ item }) => (
-                        <TouchableOpacity style={global.menuItens} onPress={() => getUsers(item.id)}>
+                        <TouchableOpacity style={global.menuItens} onPress={() => { }}>
                             <Text style={global.menuItemtext}>{item.itemName} </Text>
                         </TouchableOpacity>
                     )}
@@ -48,9 +39,20 @@ export default function Home() {
             </View>
             <View style={global.footer}>
 
-            </View>            
+            </View>
         </View>
     );
 }
 
+const styles = StyleSheet.create({        
+    botao: {
+      width: 300,
+      height: 42,
+      backgroundColor: "#fff",
+      marginTop: 10,
+      borderRadius: 4,
+      alignItems: "center",
+      justifyContent: "center",
+    }
+});
 

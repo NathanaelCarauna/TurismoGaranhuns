@@ -16,8 +16,12 @@ export const AuthProvider = ({ children }) => {
         setUser(response.user);
     }
 
+    async function signOut() {
+        setUser(null);
+    }
+
     return (
-        <AuthContext.Provider value={{ signed: !!user, user, signIn}}>
+        <AuthContext.Provider value={{ signed: !!user, user, signIn, signOut}}>
             {children}
         </AuthContext.Provider>
     )
