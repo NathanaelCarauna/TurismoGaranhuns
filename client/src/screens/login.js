@@ -1,13 +1,17 @@
 import { StatusBar } from "expo-status-bar";
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import { Alert, StyleSheet, Text, View, TouchableOpacity, TextInput, Button } from "react-native";
-import { signIn } from '../services/auth';
+import AuthContext from '../contexts/auth';
 
 export default function Login() {  
-    async function handleSignIn() {
-      const response = await signIn();
-      console.log(response);
-    }
+
+  const {signed, user, signIn} = useContext(AuthContext);
+  console.log(signed);
+  console.log(user);
+  
+  function handleSignIn() {    
+    signIn();
+  }
 
   return (
     <View style={styles.container}>

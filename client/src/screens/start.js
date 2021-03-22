@@ -4,24 +4,16 @@ import {
   StyleSheet,
   Text,
   View,
-  Button,
-  Alert,
-  FlatList,
-  TextInput,
-  KeyboardAvoidingView,
-  OnPress,
   TouchableOpacity,
 } from "react-native";
 import Login from "./login";
 
 export default function Start({ navigation }) {
   return (
-    <View style={styles.container}>
-      <Button
-        style={styles.botao}
-        title="Login"
-        onPress={() => navigation.navigate(Login)}
-      />
+    <View style={styles.container}>      
+      <TouchableOpacity style={styles.botao} onPress={() => navigation.navigate(Login)}>
+        <Text>Login</Text>
+      </TouchableOpacity>
 
       <TouchableOpacity style={styles.botao}>
         <Text>Cadastre-se</Text>
