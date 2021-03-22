@@ -31,8 +31,10 @@ export const AuthProvider = ({ children }) => {
         await AsyncStorage.setItem('@TGAuth:token', response.token);
     }
 
-    async function signOut() {
-        setUser(null);
+    function signOut() {
+        AsyncStorage.clear().then(() => {
+            setUser(null);
+        })
     }
 
     return (
