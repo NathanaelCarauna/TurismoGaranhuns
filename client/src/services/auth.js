@@ -8,6 +8,6 @@ export function signIn() {
                     email: 'nathanael@exemplo.com'
                 },
             });
-        }, 2000);
+        }, 1000);
     })
 }
