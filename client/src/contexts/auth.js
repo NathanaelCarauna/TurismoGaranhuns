@@ -11,19 +11,20 @@ const AuthContext = createContext({
 });
 
 export const AuthProvider = ({ children }) => {
-    const [loading, setLoading] = useState(true)
+    const [loading, setLoading] = useState(null)
     const [user, setUser] = useState(null);
 
     useEffect(() => {
+        setLoading(true)
         async function loadStorageData(){
             const storagedUser = await AsyncStorage.getItem('@TGAuth:user');
             const storageToken = await AsyncStorage.getItem('@TGAuth:token');
-            
+
             if(storagedUser && storageToken){
                 api.defaults.headers.Authorization= `Bearer ${storageToken}`
                 setUser(JSON.parse(storagedUser));
-                setLoading(false);
             }
+            setLoading(false);
         }
         loadStorageData();
     }, [])
