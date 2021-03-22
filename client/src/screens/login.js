@@ -1,17 +1,14 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
-import {
-  Alert,
-  StyleSheet,
-  Text,
-  View,
-  FlatList,
-  TouchableOpacity,
-  TextInput,
-  Button,
-} from "react-native";
+import { Alert, StyleSheet, Text, View, TouchableOpacity, TextInput, Button } from "react-native";
+import { signIn } from '../services/auth';
 
-export default function Login() {
+export default function Login() {  
+    async function handleSignIn() {
+      const response = await signIn();
+      console.log(response);
+    }
+
   return (
     <View style={styles.container}>
       <TextInput style={styles.input} placeholder="Digite seu email" />
@@ -19,14 +16,10 @@ export default function Login() {
         style={styles.input}
         secureTextEntry={true}
         placeholder="Digite sua senha"
-      />
-      <TouchableOpacity style={styles.botao}>
+      />            
+      <TouchableOpacity style={styles.botao} onPress={handleSignIn}>
         <Text>Login</Text>
-      </TouchableOpacity>
-      <Button
-        title="Start"
-        onPress={() => this.props.navigation.navigate("Start")}
-      />
+      </TouchableOpacity>      
     </View>
   );
 }
