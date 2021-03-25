@@ -9,19 +9,27 @@ import {
   TouchableOpacity,
   TextInput,
 } from "react-native";
-
-export default function Login() {
+import Home from "./home";
+import Start from "./start";
+export default function Cadastro({navigation}) {
   return (
     <View style={styles.container}>
-      <TextInput style={styles.input} placeholder="Digite seu email" />
+      <TextInput style={styles.input}
+       placeholder="Email"/>
+      <TextInput style={styles.input}
+       placeholder="Usuário"
+      />
       <TextInput
         style={styles.input}
         secureTextEntry={true}
-        placeholder="Digite sua senha"
+        placeholder="Senha"
       />
-      <TouchableOpacity style={styles.botaoEntrar}>
+      <TouchableOpacity style={styles.botaoEntrar}
+      onPress={()=> navigation.navigate(Home)}
+      >
         <Text>Entrar</Text>
       </TouchableOpacity>
+      
     </View>
   );
 }
@@ -75,5 +83,5 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
 
-  },
+  }
 });

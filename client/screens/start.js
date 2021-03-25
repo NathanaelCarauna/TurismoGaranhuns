@@ -10,27 +10,41 @@ import {
   TextInput,
   KeyboardAvoidingView,
   OnPress,
-  TouchableOpacity,
+  TouchableOpacity, Image
 } from "react-native";
 import Login from "./login";
+import Home from "./home";
+import Cadastro from "./cadastro";
 
 export default function Start({ navigation }) {
   return (
+    <KeyboardAvoidingView>
+      <View>
+        <Image 
+        source={require(".assets/logo.png")}
+        />
+      </View>
+      
     <View style={styles.container}>
-      <Button
-        style={styles.botao}
-        title="Login"
+      <TouchableOpacity style={styles.botao}
         onPress={() => navigation.navigate(Login)}
-      />
-
-      <TouchableOpacity style={styles.botao}>
+        >
+          <Text>Login</Text>
+        </TouchableOpacity>      
+      <TouchableOpacity style={styles.botao}
+        onPress={() => navigation.navigate(Cadastro)}
+        >
         <Text>Cadastre-se</Text>
       </TouchableOpacity>
-
-      <TouchableOpacity style={styles.botaoConvidado}>
+      <TouchableOpacity style={styles.botaoConvidado}
+       onPress={() => navigation.navigate(Home)}
+      
+      >
         <Text>Entrar como convidado</Text>
       </TouchableOpacity>
     </View>
+    </KeyboardAvoidingView>
+
   );
 }
 const styles = StyleSheet.create({
