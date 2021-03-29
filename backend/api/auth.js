@@ -29,6 +29,6 @@ module.exports = app => {
         else{
             return res.status(400).send("Usuário não cadastrado")
         }
-        return { signin }
     }
+    return { signin }
 }
