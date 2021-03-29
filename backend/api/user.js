@@ -10,9 +10,9 @@ module.exports = app => {
     const save = (req, res) => {
         obterHash(req.body.password, hash => {
             const password = hash;
-
+            
             app.db('users')
-                .insert({nome: req.body.nome, email: req.body.email, password:password})
+                .insert({nome: req.body.nome, email: req.body.email.toLowerCase(), password:password})
                 .then(() => res.status(204).send())
                 .catch(err => res.status(400).json(err))
         })
