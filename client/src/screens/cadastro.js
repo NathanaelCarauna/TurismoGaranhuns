@@ -9,8 +9,8 @@ import {
   TouchableOpacity,
   TextInput,
 } from "react-native";
-import Home from "./home";
-import Start from "./start";
+import Login from "./login";
+
 export default function Cadastro({navigation}) {
   return (
     <View style={styles.container}>
@@ -25,7 +25,8 @@ export default function Cadastro({navigation}) {
         placeholder="Senha"
       />
       <TouchableOpacity style={styles.botaoEntrar}
-      onPress={()=> navigation.navigate(Home)}
+      onPress={()=> navigation.navigate(Login)}
+
       >
         <Text>Entrar</Text>
       </TouchableOpacity>

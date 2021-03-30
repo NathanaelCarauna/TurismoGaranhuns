@@ -4,7 +4,6 @@ import {
   StyleSheet,
   Text,
   View,
-<<<<<<< HEAD:client/screens/start.js
   Button,
   Alert,
   FlatList,
@@ -12,9 +11,6 @@ import {
   KeyboardAvoidingView,
   OnPress,
   TouchableOpacity, Image
-=======
-  TouchableOpacity,
->>>>>>> f73eda4dcf78e0dd0d9179ddf51b0abf556b790a:client/src/screens/start.js
 } from "react-native";
 import Login from "./login";
 import Home from "./home";
@@ -22,31 +18,17 @@ import Cadastro from "./cadastro";
 
 export default function Start({ navigation }) {
   return (
-<<<<<<< HEAD:client/screens/start.js
-      
-    <View style={styles.container}>
-      <TouchableOpacity style={styles.botao}
-        onPress={() => navigation.navigate(Login)}
-        >
-          <Text>Login</Text>
-        </TouchableOpacity>      
-      <TouchableOpacity style={styles.botao}
-        onPress={() => navigation.navigate(Cadastro)}
-        >
-=======
-    <View style={styles.container}>      
+    <View style={styles.container}>     
+      <Image source={require('../../assets/logo.png')} style={styles.logo}/> 
       <TouchableOpacity style={styles.botao} onPress={() => navigation.navigate(Login)}>
         <Text>Login</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.botao}>
->>>>>>> f73eda4dcf78e0dd0d9179ddf51b0abf556b790a:client/src/screens/start.js
+      <TouchableOpacity style={styles.botao} onPress={() => navigation.navigate(Cadastro)}>
         <Text>Cadastre-se</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.botaoConvidado}
-       onPress={() => navigation.navigate(Home)}
-      
-      >
+
+      <TouchableOpacity style={styles.botaoConvidado}>
         <Text>Entrar como convidado</Text>
       </TouchableOpacity>
     </View>
@@ -83,5 +65,9 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "black",
     backgroundColor: "#EA701B",
-  },
+  },logo: {
+    width: 80,    
+    height: 80,
+    marginBottom: 35,
+  }
 });

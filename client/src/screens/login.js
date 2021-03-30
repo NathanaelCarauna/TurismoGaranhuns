@@ -1,16 +1,4 @@
 import { StatusBar } from "expo-status-bar";
-<<<<<<< HEAD:client/screens/login.js
-import React, { useState } from "react";
-import {
-  Alert,
-  StyleSheet,
-  Text,
-  View,
-  FlatList,
-  TouchableOpacity,
-  TextInput,
-} from "react-native";
-=======
 import React, { useContext } from "react";
 import { Alert, StyleSheet, Text, View, TouchableOpacity, TextInput, Button } from "react-native";
 import AuthContext from '../contexts/auth';
@@ -24,7 +12,6 @@ export default function Login() {
   function handleSignIn() {    
     signIn();
   }
->>>>>>> f73eda4dcf78e0dd0d9179ddf51b0abf556b790a:client/src/screens/login.js
 
   return (
     <View style={styles.container}>
@@ -33,17 +20,10 @@ export default function Login() {
         style={styles.input}
         secureTextEntry={true}
         placeholder="Digite sua senha"
-<<<<<<< HEAD:client/screens/login.js
-      />
-      <TouchableOpacity style={styles.botaoEntrar}>
-        <Text>Entrar</Text>
-      </TouchableOpacity>
-=======
       />            
       <TouchableOpacity style={styles.botao} onPress={handleSignIn}>
         <Text>Login</Text>
       </TouchableOpacity>      
->>>>>>> f73eda4dcf78e0dd0d9179ddf51b0abf556b790a:client/src/screens/login.js
     </View>
   );
 }
