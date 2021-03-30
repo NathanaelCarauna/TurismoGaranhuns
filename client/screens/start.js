@@ -18,12 +18,6 @@ import Cadastro from "./cadastro";
 
 export default function Start({ navigation }) {
   return (
-    <KeyboardAvoidingView>
-      <View>
-        <Image 
-        source={require(".assets/logo.png")}
-        />
-      </View>
       
     <View style={styles.container}>
       <TouchableOpacity style={styles.botao}
@@ -43,8 +37,6 @@ export default function Start({ navigation }) {
         <Text>Entrar como convidado</Text>
       </TouchableOpacity>
     </View>
-    </KeyboardAvoidingView>
-
   );
 }
 const styles = StyleSheet.create({
