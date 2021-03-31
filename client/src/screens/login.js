@@ -21,7 +21,7 @@ export default function Login() {
         secureTextEntry={true}
         placeholder="Digite sua senha"
       />            
-      <TouchableOpacity style={styles.botao} onPress={handleSignIn}>
+      <TouchableOpacity style={styles.botaoEntrar} onPress={handleSignIn}>
         <Text>Login</Text>
       </TouchableOpacity>      
     </View>

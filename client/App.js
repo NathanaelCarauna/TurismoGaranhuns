@@ -5,6 +5,8 @@ import { createStackNavigator } from "@react-navigation/stack";
 import Routes from './src/routes'
 import {AuthProvider} from './src/contexts/auth';
 
+
+
 const Stack = createStackNavigator();
 
 export default function App() {
