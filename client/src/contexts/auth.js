@@ -28,12 +28,45 @@ export const AuthProvider = ({ children }) => {
         }
         loadStorageData();
     }, [])
-    async function signIn() {
-        const response = await auth.signIn();        
-        setUser(response.user);
-        api.defaults.headers.Authorization= `Bearer ${response.token}`
-        await AsyncStorage.setItem('@TGAuth:user', JSON.stringify(response.user));
-        await AsyncStorage.setItem('@TGAuth:token', response.token);
+
+    async function signUp(nome, email, password){
+        try{
+            await auth.signUp(nome, email, password)
+                .then(response => {
+                    if(response.status = 204){
+                        signIn(email, password)
+                    }else{
+                        return false
+                    }
+                })
+        }catch(e){
+            console.log(e)
+        }
+    }
+    //Login no sistema
+    async function signIn(email, password) {
+        try{
+            await auth.signIn(email, password)
+                .then(response => {
+                    console.log(response.data.user)
+                    if(response.data.user){                    
+                        setUser(response.data.user);
+                        AsyncStorage.setItem('@TGAuth:user', JSON.stringify(response.data.user));
+                    }
+                    if(response.data.token){
+                        api.defaults.headers.Authorization= `Bearer ${response.data.token}`
+                        AsyncStorage.setItem('@TGAuth:token', response.data.token);
+                    }    
+                    return(true)            
+                })
+                .catch(err => {
+                    console.log(err);
+                    return false;
+                });                
+        }catch(e){
+            console.log(e);
+            return false;
+        }
     }
 
     function signOut() {
@@ -43,7 +76,7 @@ export const AuthProvider = ({ children }) => {
     }    
     
     return (
-        <AuthContext.Provider value={{ signed: !!user, user, signIn, signOut, loading}}>
+        <AuthContext.Provider value={{ signed: !!user, user, signIn, signOut, signUp, loading}}>
             {children}
         </AuthContext.Provider>
     )
