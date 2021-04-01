@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import React, { useState } from "react";
+import React, { useState, useContext} from "react";
 import {
   Alert,
   StyleSheet,
@@ -8,29 +8,74 @@ import {
   FlatList,
   TouchableOpacity,
   TextInput,
+  Image
 } from "react-native";
-import Login from "./login";
+import AuthContext from '../contexts/auth';
 
 export default function Cadastro({navigation}) {
+  const [nome, setNome] = useState('')  
+  const [email, setEmail] = useState('')  
+  const [password, setPassword] = useState('')  
+  const [confirmPassword, setConfirmPassword] = useState('')  
+  
+  const { signed, user, signUp } = useContext(AuthContext);
+  
+
+  function handleSignUp() {
+    let canSignUp = true
+    if(!email){
+      console.log('O campo Email é necessário')
+      canSignUp = false
+    }
+    if(!password){
+      console.log('É preciso digitar uma senha')
+      canSignUp = false
+    }
+    if(!(password === confirmPassword)){
+      console.log('As senhas não coincidem')
+      canSignUp = false
+    }
+    if(canSignUp){
+      signUp(nome, email, password);
+    }
+  }
+
   return (
     <View style={styles.container}>
-      <TextInput style={styles.input}
-       placeholder="Email"/>
-      <TextInput style={styles.input}
-       placeholder="Usuário"
-      />
-      <TextInput
-        style={styles.input}
-        secureTextEntry={true}
-        placeholder="Senha"
-      />
-      <TouchableOpacity style={styles.botaoEntrar}
-      onPress={()=> navigation.navigate(Login)}
+      <Image source={require('../../assets/logo.png')} style={styles.logo}/> 
+      <View style={styles.formContainer}>
+        <TextInput 
+          style={styles.input} 
+          placeholder="Digite seu nome" 
+          value={nome}
+          onChangeText={nome => setNome(nome)}/>
 
-      >
-        <Text>Entrar</Text>
-      </TouchableOpacity>
-      
+        <TextInput 
+          style={styles.input} 
+          placeholder="Digite seu email" 
+          value={email}
+          onChangeText={email => setEmail(email)}/>
+          
+        <TextInput 
+          style={styles.input} 
+          secureTextEntry={true} 
+          placeholder="Digite uma senha"
+          value={password}
+          onChangeText={password => setPassword(password)}/>
+        
+        <TextInput 
+          style={styles.input} 
+          secureTextEntry={true} 
+          placeholder="Confirme sua senha"
+          value={confirmPassword}
+          onChangeText={confirmPassword => setConfirmPassword(confirmPassword)}/>
+
+        <TouchableOpacity onPress={handleSignUp}>
+          <View style={styles.botaoEntrar}>
+            <Text style={styles.botaoText}>Entrar</Text>
+          </View>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }
@@ -75,7 +120,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     borderRadius: 3,
   },
-  botaoEntrar:{
+  botaoEntrar: {
     width: 300,
     height: 42,
     backgroundColor: "#EA701B",
@@ -83,6 +128,16 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     alignItems: "center",
     justifyContent: "center",
+  },
+  logo: {
+    width: 80,    
+    height: 80,
+    marginBottom: 35,
+  },
+  formContainer: {
+
+  },
+  botaoText: {
 
   }
 });
