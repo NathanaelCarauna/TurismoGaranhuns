@@ -23,6 +23,7 @@ module.exports = app => {
                 const payload = {id: user.id}
                 res.json({
                     user:{
+                        id: user.id,
                         nome: user.nome,
                         email: user.email,
                     },
