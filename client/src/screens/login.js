@@ -1,29 +1,49 @@
 import { StatusBar } from "expo-status-bar";
-import React, { useContext } from "react";
-import { Alert, StyleSheet, Text, View, TouchableOpacity, TextInput, Button } from "react-native";
+import React, { useContext, useState } from "react";
+import { Alert,
+        StyleSheet,
+        Text,
+        View,
+        TouchableOpacity,
+        TextInput,
+        Image } from "react-native";
 import AuthContext from '../contexts/auth';
 
-export default function Login() {  
 
-  const {signed, user, signIn} = useContext(AuthContext);
-  console.log(signed);
-  console.log(user);
+export default function Login() {
   
-  function handleSignIn() {    
-    signIn();
+  const [email, setEmail] = useState('')  
+  const [password, setPassword] = useState('')  
+  
+  const { signed, user, signIn } = useContext(AuthContext);
+
+  function handleSignIn() {
+    signIn(email, password);
   }
 
   return (
     <View style={styles.container}>
-      <TextInput style={styles.input} placeholder="Digite seu email" />
-      <TextInput
-        style={styles.input}
-        secureTextEntry={true}
-        placeholder="Digite sua senha"
-      />            
-      <TouchableOpacity style={styles.botaoEntrar} onPress={handleSignIn}>
-        <Text>Login</Text>
-      </TouchableOpacity>      
+      <Image source={require('../../assets/logo.png')} style={styles.logo}/> 
+      <View style={styles.formContainer}>
+        <TextInput 
+          style={styles.input} 
+          placeholder="Digite seu email" 
+          value={email}
+          onChangeText={email => setEmail(email)}/>
+          
+        <TextInput 
+          style={styles.input} 
+          secureTextEntry={true} 
+          placeholder="Digite sua senha"
+          value={password}
+          onChangeText={password => setPassword(password)}/>
+
+        <TouchableOpacity onPress={handleSignIn}>
+          <View style={styles.botaoEntrar}>
+            <Text style={styles.botaoText}>Entrar</Text>
+          </View>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }
@@ -68,7 +88,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     borderRadius: 3,
   },
-  botaoEntrar:{
+  botaoEntrar: {
     width: 300,
     height: 42,
     backgroundColor: "#EA701B",
@@ -76,6 +96,16 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     alignItems: "center",
     justifyContent: "center",
+  },
+  logo: {
+    width: 80,    
+    height: 80,
+    marginBottom: 35,
+  },
+  formContainer: {
 
   },
+  botaoText: {
+
+  }
 });
