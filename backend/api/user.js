@@ -8,6 +8,8 @@ module.exports = app => {
     }
 
     const save = (req, res) => {
+        console.log("Request Received")
+        console.log('Body: ' + req.body)
         obterHash(req.body.password, hash => {
             const password = hash;
             
@@ -28,6 +30,8 @@ module.exports = app => {
     // }
 
     const getUser = (req, res) => {
+        console.log("Request Received")
+        console.log('Params: ' + req.params)
         app.db('users')
             .where({id: req.params.id})
             .first()
@@ -42,6 +46,8 @@ module.exports = app => {
     }
 
     const removeUser = (req, res) =>{
+        console.log("Request Received")
+        console.log('Params: ' + req.params)
         app.db('users')
             .where({ id: req.params.id })
             .del()
@@ -57,6 +63,8 @@ module.exports = app => {
     }
 
     const updateUser = (req, res) =>{        
+        console.log("Request Received")
+        console.log('Body: ' + req.body)
         if(req.body.password){
             obterHash(req.body.password, hash => {
                 const password = hash;
