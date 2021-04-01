@@ -1,5 +1,6 @@
 import React, { createContext, useState, useEffect } from 'react';
 import * as auth from '../services/auth';
+import * as userApi from '../services/userApi';
 import api from '../services/api';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -31,16 +32,18 @@ export const AuthProvider = ({ children }) => {
 
     async function signUp(nome, email, password){
         try{
-            await auth.signUp(nome, email, password)
+            await userApi.signUp(nome, email, password)
                 .then(response => {
                     if(response.status = 204){
                         signIn(email, password)
+                        return true;
                     }else{
                         return false
                     }
                 })
         }catch(e){
             console.log(e)
+            return false;
         }
     }
     //Login no sistema
@@ -69,14 +72,34 @@ export const AuthProvider = ({ children }) => {
         }
     }
 
+    async function deleteAccount(id){
+        try{
+            await userApi.deleteAccount(id)
+                .then(response => {
+                    if(response.status == 204){
+                        signOut()
+                    }else{
+                        return false;
+                    }                    
+                })
+                .catch(err => {
+                    console.log(err)
+                    return false;
+                })
+
+        }catch(e){
+            console.log(e);
+        }
+    }
+
     function signOut() {
         AsyncStorage.clear().then(() => {
             setUser(null);
         })
-    }    
+    }        
     
     return (
-        <AuthContext.Provider value={{ signed: !!user, user, signIn, signOut, signUp, loading}}>
+        <AuthContext.Provider value={{ signed: !!user, user, signIn, signOut, signUp, deleteAccount, loading}}>
             {children}
         </AuthContext.Provider>
     )
