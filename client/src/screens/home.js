@@ -5,32 +5,43 @@ import Header from '../components/header';
 import AuthContext from '../contexts/auth';
 
 
-export default function Home() {
+export default function Home({ navigation}) {
+    const {signOut, deleteAccount, user } = useContext(AuthContext);
+    console.log(user)
+    
     const [name, setName] = useState('Turismo APP');
+
     const [menuItens, setMenuItens] = useState([
-        { itemName: 'Item1', id: '1' },
-        { itemName: 'Item2', id: '2' },
-        { itemName: 'Item3', id: '3' },
-        { itemName: 'Item4', id: '4' },
+        { itemName: 'Parques', id: '1' },
+        { itemName: 'Praças', id: '2' },
+        { itemName: 'Religião', id: '3' },
+        { itemName: 'Editar Usuário', id: '4' },
+        { itemName: 'Remover Usuário', id: '5' },
+        { itemName: 'Sair', id: '6' },
     ])
 
-    const {signOut } = useContext(AuthContext);
-    function handleSignOut() {
-        signOut();
-    }
+    function pressHandler(id){
+        if(id == 4){
+            // navigation.navigate('editUsuario')
+        }
+        if(id == 5){            
+            const  res = deleteAccount(user.id)            
+            console.log(res)
+        }
+        if(id == 6){
+            signOut();
+        }
+
+    }    
 
     return (
-        <View style={global.container}>
-            <Header />
-            <TouchableOpacity style={styles.botao} onPress={handleSignOut}>
-                <Text>Logout</Text>
-            </TouchableOpacity>
+        <View style={global.container}>            
             <View style={global.body}>
                 <FlatList
                     keyExtractor={(item) => item.id}
                     data={menuItens}
                     renderItem={({ item }) => (
-                        <TouchableOpacity style={global.menuItens} onPress={() => { }}>
+                        <TouchableOpacity style={global.menuItens} onPress={() => pressHandler(item.id)}>
                             <Text style={global.menuItemtext}>{item.itemName} </Text>
                         </TouchableOpacity>
                     )}
