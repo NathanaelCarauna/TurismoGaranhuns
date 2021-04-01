@@ -3,11 +3,13 @@ module.exports = app => {
     app.post('/signup', app.api.user.save);
     app.post('/signin', app.api.auth.signin);
     
-    app.route('/updateUser/:id')
+    // app.route('/user')
+    //     // .all(app.config.passport.authenticate())
+    //     .get(app.api.user.getAll)
+
+    app.route('/user/:id')
         .all(app.config.passport.authenticate())
+        .get(app.api.user.getUser)
         .patch(app.api.user.updateUser)
-    
-    app.route('/removeUser/:id')
-        .all(app.config.passport.authenticate())
-        .delete(app.api.user.removeUser)
+        .delete(app.api.user.removeUser)    
 }

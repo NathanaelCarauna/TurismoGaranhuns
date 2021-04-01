@@ -18,6 +18,15 @@ module.exports = app => {
         })
     }
 
+    // const getAll = (req, res) =>{
+    //     var users = []
+    //     app.db('users')            
+    //         .select("nome")
+    //         .then(user => users.push(user))
+    //         .catch(err => res.status(500).json(err))
+    //     return res.status(200).json({users})
+    // }
+
     const getUser = (req, res) => {
         app.db('users')
             .where({id: req.params.id})
@@ -25,8 +34,11 @@ module.exports = app => {
             .then(user => {
                 if(user){
                     return res.status(200).json(user);
+                }else{
+                    return res.status(400).send();
                 }
             })
+            .catch(err => res.status(500).json(err))
     }
 
     const removeUser = (req, res) =>{
@@ -89,5 +101,5 @@ module.exports = app => {
             .catch(err => res.status(400).json(err))
         }
     }
-    return { save, updateUser, removeUser }
+    return { save, updateUser, removeUser, getUser }
 }
