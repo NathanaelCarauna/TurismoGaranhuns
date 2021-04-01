@@ -1,13 +1,10 @@
-export function signIn() {
-    return new Promise((resolve) => {
-        setTimeout(() =>{
-            resolve({
-                token: '12938123012fj2fmmf0sad9fm2398ml0',
-                user: {
-                    name: 'Nathanael',
-                    email: 'nathanael@exemplo.com'
-                },
-            });
-        }, 1000);
-    })
+import api from './api';
+
+export function signIn(email, password){
+    return new api.post('/signin', {email, password})        
+        
+}
+
+export function signUp(nome, email, password){
+    return new api.post('/signup', {nome, email, password})
 }
