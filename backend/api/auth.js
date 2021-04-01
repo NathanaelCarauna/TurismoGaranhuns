@@ -4,6 +4,8 @@ const bcrypt = require('bcrypt-nodejs');
 
 module.exports = app => {
     const signin = async (req, res) => {
+        console.log("Request Received " + req.url)
+        console.log('Body: ' + req.body.email + ' ' + req.body.password)
         if(!req.body.email || !req.body.password){
             return res.status(400).send("Dados incompletos");
         }
@@ -20,8 +22,10 @@ module.exports = app => {
 
                 const payload = {id: user.id}
                 res.json({
-                    nome: user.nome,
-                    email: user.email,
+                    user:{
+                        nome: user.nome,
+                        email: user.email,
+                    },
                     token: jwt.encode(payload, authSecret)
                 })
             })
