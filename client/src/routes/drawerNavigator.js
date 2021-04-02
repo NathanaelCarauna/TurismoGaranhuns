@@ -1,14 +1,14 @@
 import React from 'react'
 import {createDrawerNavigator} from '@react-navigation/drawer'
-import Home from '../screens/home'
+import Home from './tabNavigator';
 import EditUsuario from '../screens/editUsuario'
 
 
 const Drawer = createDrawerNavigator()
 
-export default props =>(
+export default DrawerNavigator =>(
     <Drawer.Navigator>
-        <Drawer.Screen name = "Teste" component={Home}/>
-        <Drawer.Screen name = "Teste2" component={EditUsuario}/>
+        <Drawer.Screen name = "Home" component={Home}/>
+        <Drawer.Screen name = "EditUsuario" component={EditUsuario}/>
     </Drawer.Navigator>
 )
