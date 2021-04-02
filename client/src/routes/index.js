@@ -1,8 +1,10 @@
 import React, { useContext } from 'react';
 import {View, ActivityIndicator} from 'react-native';
 import AuthContext from '../contexts/auth';
-import AuthRoutes from './auth.routes';
-import AppRoutes from './app.routes';
+import AuthRoutes from './authStack.routes';
+import TabNavigator from './tabNavigator';
+// import AppRoutes from './appStack.routes';
+
 
 export default function Routes(){
     const {signed, loading} = useContext(AuthContext);
@@ -13,5 +15,5 @@ export default function Routes(){
             </View>
         )
     }
-    return signed ? <AppRoutes/> : <AuthRoutes/>    
+    return signed ? <TabNavigator/> : <AuthRoutes/>    
 }

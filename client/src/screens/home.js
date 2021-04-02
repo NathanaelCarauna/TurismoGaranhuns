@@ -48,9 +48,9 @@ export default function Home({ navigation}) {
                 />
 
             </View>
-            <View style={global.footer}>
+            {/* <View style={global.footer}>
 
-            </View>
+            </View> */}
         </View>
     );
 }
