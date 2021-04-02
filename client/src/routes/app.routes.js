@@ -7,7 +7,17 @@ const AppStack = createStackNavigator();
 
 export default function AppRoutes() {
     return (
-    <AppStack.Navigator>
+    <AppStack.Navigator
+        screenOptions={{
+            headerStyle: {
+                backgroundColor: "#213967",
+                height: 60,
+            },
+            headerTintColor: "white",
+            headerBackTitle: "Back",
+            headerTitle: '',            
+        }}
+    >
         <AppStack.Screen name="Home" component={Home}/>
         <AppStack.Screen name="EditUsuario" component={EditUsuario}/>
     </AppStack.Navigator>
