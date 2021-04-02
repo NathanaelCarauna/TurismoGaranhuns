@@ -22,7 +22,7 @@ export default function Home({ navigation}) {
 
     function pressHandler(id){
         if(id == 4){
-            // navigation.navigate('editUsuario')
+            navigation.navigate('EditUsuario')
         }
         if(id == 5){            
             const  res = deleteAccount(user.id)            
