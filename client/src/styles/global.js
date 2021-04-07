@@ -9,6 +9,7 @@ export const global = StyleSheet.create({
         justifyContent: 'center',
     },
     body: {
+        flex: 1,
         width: '100%',
         height: '82%',
         marginTop: 40,
@@ -26,11 +27,11 @@ export const global = StyleSheet.create({
     // Main end
 
     //Main menu start
-    menuItens: {
+    menuItens: {        
         backgroundColor: '#EA701B',
         paddingVertical: 50,
         width: 320,
-        margin: 20,
+        margin: 15,
         borderRadius: 10,
     },
     menuItemtext: {
