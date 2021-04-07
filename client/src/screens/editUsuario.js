@@ -1,38 +1,49 @@
-import React, {useState, useContext} from 'react';
+import React, { useState, useContext } from 'react';
 import {
-Alert,
-StyleSheet,
-Text,
-View,
-FlatList,
-TouchableOpacity,
-TextInput,
+    Alert,
+    StyleSheet,
+    Text,
+    View,
+    FlatList,
+    TouchableOpacity,
+    TextInput,
 } from "react-native";
 import AuthContext from '../contexts/auth';
 
 export default function EditUsuario({ navigation }) {
-    const [nome, setNome] = useState('')
-    const [email, setEmail] = useState('')
+    const { user, updateUser } = useContext(AuthContext);
+
+    const [nome, setNome] = useState(user.nome)
+    const [email, setEmail] = useState(user.email)
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
 
-    const { user } = useContext(AuthContext);
+    const handleUpdate = () => {
+        let canUpdate = true;
+        if (!(password === confirmPassword)) {
+            console.log('As senhas não coincidem')
+            canUpdate = false;
+        }
+        if(canUpdate) {
+            updateUser(user.id, nome, email, password)
+        }
+    }
     return (
-        <View style={styles.container}>    
+        <View style={styles.container}>
             <View style={styles.upperSide}>
-            
-            </View>        
+
+            </View>
             <View style={styles.formContainer}>
                 <TextInput
                     style={styles.input}
                     placeholder="Digite seu nome"
-                    value={user.nome}
+                    value={nome}
                     onChangeText={nome => setNome(nome)} />
 
                 <TextInput
                     style={styles.input}
                     placeholder="Digite seu email"
-                    value={user.email}
+                    value={email}
                     onChangeText={email => setEmail(email)} />
 
                 <TextInput
@@ -49,7 +60,7 @@ export default function EditUsuario({ navigation }) {
                     value={confirmPassword}
                     onChangeText={confirmPassword => setConfirmPassword(confirmPassword)} />
 
-                <TouchableOpacity onPress={()=>{}}>
+                <TouchableOpacity onPress={handleUpdate}>
                     <View style={styles.botaoEntrar}>
                         <Text style={styles.botaoText}>Salvar</Text>
                     </View>
@@ -62,9 +73,9 @@ export default function EditUsuario({ navigation }) {
 const styles = StyleSheet.create({
     // Main start
     container: {
-      flex: 1,    
-      alignItems: "center",
-      justifyContent: "center",
+        flex: 1,
+        alignItems: "center",
+        justifyContent: "center",
     },
     upperSide: {
         flex: 1,
@@ -79,54 +90,53 @@ const styles = StyleSheet.create({
         alignItems: "center",
     },
     input: {
-      marginTop: 10,
-      padding: 10,
-      width: 300,
-      backgroundColor: "#fff",
-      fontSize: 16,
-      fontWeight: "bold",
-      borderRadius: 3,
+        marginTop: 10,
+        padding: 10,
+        width: 300,
+        backgroundColor: "#fff",
+        fontSize: 16,
+        fontWeight: "bold",
+        borderRadius: 3,
     },
     botao: {
-      width: 300,
-      height: 42,
-      backgroundColor: "#fff",
-      marginTop: 10,
-      borderRadius: 4,
-      alignItems: "center",
-      justifyContent: "center",
+        width: 300,
+        height: 42,
+        backgroundColor: "#fff",
+        marginTop: 10,
+        borderRadius: 4,
+        alignItems: "center",
+        justifyContent: "center",
     },
     botaoText: {
-      fontSize: 16,
-      fontWeight: "bold",
-      color: "black",
+        fontSize: 16,
+        fontWeight: "bold",
+        color: "black",
     },
     input: {
-      marginTop: 10,
-      padding: 10,
-      width: 300,
-      backgroundColor: "#fff",
-      fontSize: 16,
-      fontWeight: "bold",
-      borderRadius: 3,
+        marginTop: 10,
+        padding: 10,
+        width: 300,
+        backgroundColor: "#fff",
+        fontSize: 16,
+        fontWeight: "bold",
+        borderRadius: 3,
     },
     botaoEntrar: {
-      width: 300,
-      height: 42,
-      backgroundColor: "#213967",
-      textDecorationColor: "#fff",
-      marginTop: 30,
-      borderRadius: 4,
-      alignItems: "center",
-      justifyContent: "center",
+        width: 300,
+        height: 42,
+        backgroundColor: "#213967",
+        textDecorationColor: "#fff",
+        marginTop: 30,
+        borderRadius: 4,
+        alignItems: "center",
+        justifyContent: "center",
     },
     logo: {
-      width: 80,    
-      height: 80,
-      marginBottom: 35,
-    },    
+        width: 80,
+        height: 80,
+        marginBottom: 35,
+    },
     botaoText: {
         color: "#FFFFFF",
     }
-  });
-  
+});

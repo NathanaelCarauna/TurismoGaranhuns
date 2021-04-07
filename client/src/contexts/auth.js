@@ -91,6 +91,21 @@ export const AuthProvider = ({ children }) => {
             console.log(e);
         }
     }
+    async function updateUser(id, nome, email, password){
+        try{
+            await userApi.updateUser(id, nome, email, password)
+                .then(response => {
+                    if(response.status == 204){
+                        console.log('Atualização feita com sucesso')
+                        return true;
+                    }else{
+                        return false;
+                    }
+                });
+        }catch(e){
+            console.log(e)
+        }
+    }
 
     function signOut() {
         AsyncStorage.clear().then(() => {
@@ -99,7 +114,7 @@ export const AuthProvider = ({ children }) => {
     }        
     
     return (
-        <AuthContext.Provider value={{ signed: !!user, user, signIn, signOut, signUp, deleteAccount, loading}}>
+        <AuthContext.Provider value={{ signed: !!user, user, signIn, signOut, signUp,updateUser, deleteAccount, loading}}>
             {children}
         </AuthContext.Provider>
     )
