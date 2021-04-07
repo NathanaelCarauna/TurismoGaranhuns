@@ -15,8 +15,8 @@ export default function Home({ navigation}) {
         { itemName: 'Parques', id: '1' },
         { itemName: 'Praças', id: '2' },
         { itemName: 'Religião', id: '3' },
-        { itemName: 'Editar Usuário', id: '4' },
-        { itemName: 'Remover Usuário', id: '5' },
+        // { itemName: 'Editar Usuário', id: '4' },
+        // { itemName: 'Remover Usuário', id: '5' },
         { itemName: 'Sair', id: '6' },
     ])
 
