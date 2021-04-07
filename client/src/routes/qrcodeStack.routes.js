@@ -4,10 +4,20 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 const qrStack = createStackNavigator();
 
-export default function QrRoutes(){
-    return(
-        <qrStack.Navigator>
-            <qrStack.Screen name="QrScreen" component={QrScreen}/>
+export default function QrRoutes() {
+    return (
+        <qrStack.Navigator
+            screenOptions={{
+                headerStyle: {
+                    backgroundColor: "#213967",
+                    height: 60,
+                },
+                headerTintColor: "white",
+                headerBackTitle: "Back",
+                headerTitle: '',
+            }}
+        >
+            <qrStack.Screen name="QrScreen" component={QrScreen} />
         </qrStack.Navigator>
     )
 }
