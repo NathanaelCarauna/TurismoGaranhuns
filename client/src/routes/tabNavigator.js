@@ -8,7 +8,15 @@ const tab = createBottomTabNavigator();
 
 const bottomTabNavigator = () => {
     return (
-        <tab.Navigator>
+        <tab.Navigator
+            tabBarOptions={{ 
+                activeBackgroundColor: 'black',
+                activeTintColor: 'orange',
+                inactiveBackgroundColor: '#213967',
+                inactiveTintColor: 'white',
+                // tabStyle: {borderColor: 'white', }
+             }}
+        >
             <tab.Screen name="HOME" component={MainRoutes}/>
             <tab.Screen name="QR CODE" component={QrRoutes}/>
             <tab.Screen name="MAPA" component={MapRoutes}/>
