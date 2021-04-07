@@ -5,7 +5,7 @@ import {View, Text} from 'react-native';
 export default function QrScreen(){
     return(
         <View>
-            <Text>TELA DO MAPA</Text>
+            <Text>TELA DO AVATAR</Text>
         </View>
     )
 }
