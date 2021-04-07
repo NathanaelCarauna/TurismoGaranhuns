@@ -9,10 +9,10 @@ const tab = createBottomTabNavigator();
 const bottomTabNavigator = () => {
     return (
         <tab.Navigator>
-            <tab.Screen name="MainRoutes" component={MainRoutes}/>
-            <tab.Screen name="QrRoutes" component={QrRoutes}/>
-            <tab.Screen name="MapRoutes" component={MapRoutes}/>
-            <tab.Screen name="StampRoutes" component={StampRoutes}/>
+            <tab.Screen name="HOME" component={MainRoutes}/>
+            <tab.Screen name="QR CODE" component={QrRoutes}/>
+            <tab.Screen name="MAPA" component={MapRoutes}/>
+            <tab.Screen name="SELOS" component={StampRoutes}/>
         </tab.Navigator>
     )
 }
