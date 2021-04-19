@@ -1,7 +1,7 @@
 import React from 'react'
 import Home from '../screens/home';
-import EditUsuario from '../screens/editUsuario';
 import { createStackNavigator } from '@react-navigation/stack';
+import Parques from '../screens/Parques';
 
 const AppStack = createStackNavigator();
 
@@ -19,6 +19,6 @@ export default function AppRoutes() {
         }}
     >
         <AppStack.Screen name="Home" component={Home}/>
-        <AppStack.Screen name="EditUsuario" component={EditUsuario}/>
+        <AppStack.Screen name="Parques" component={Parques}/>
     </AppStack.Navigator>
 )}

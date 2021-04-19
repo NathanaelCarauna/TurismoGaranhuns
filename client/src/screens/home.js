@@ -21,8 +21,8 @@ export default function Home({ navigation}) {
     ])
 
     function pressHandler(id){
-        if(id == 4){
-            navigation.navigate('EditUsuario')
+        if(id == 1){
+            navigation.navigate('Parques')
         }
         if(id == 5){            
             const  res = deleteAccount(user.id)            
