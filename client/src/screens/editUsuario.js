@@ -31,7 +31,7 @@ export default function EditUsuario({ navigation }) {
     return (
         <View style={styles.container}>
             <View style={styles.upperSide}>
-
+                <View style={styles.photo}></View>
             </View>
             <View style={styles.formContainer}>
                 <TextInput
@@ -79,8 +79,16 @@ const styles = StyleSheet.create({
     },
     upperSide: {
         flex: 1,
+        alignItems: "center",
+        justifyContent: "center",
         backgroundColor: "white",
         width: "100%",
+    },
+    photo: {
+        height:110,
+        width: 110,
+        borderRadius: 50,
+        backgroundColor: "#bbb"
     },
     formContainer: {
         flex: 2,
@@ -88,6 +96,8 @@ const styles = StyleSheet.create({
         paddingTop: 20,
         width: "100%",
         alignItems: "center",
+        borderTopRightRadius: 15,
+        borderTopLeftRadius: 15,
     },
     input: {
         marginTop: 10,
