@@ -25,19 +25,4 @@ export const global = StyleSheet.create({
         borderTopRightRadius: 90,
     },
     // Main end
-
-    //Main menu start
-    menuItens: {        
-        backgroundColor: '#EA701B',
-        paddingVertical: 50,
-        width: 320,
-        margin: 15,
-        borderRadius: 10,
-    },
-    menuItemtext: {
-        textAlign: 'center',
-        fontSize: 24,
-        fontWeight: 'bold',
-    },
-    //Main menu end
 })

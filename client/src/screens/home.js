@@ -41,8 +41,9 @@ export default function Home({ navigation}) {
                     keyExtractor={(item) => item.id}
                     data={menuItens}
                     renderItem={({ item }) => (
-                        <TouchableOpacity style={global.menuItens} onPress={() => pressHandler(item.id)}>
-                            <Text style={global.menuItemtext}>{item.itemName} </Text>
+                        <TouchableOpacity style={styles.menuItens} onPress={() => pressHandler(item.id)}>
+                            <View style={styles.categoryImage}></View>
+                            <Text style={styles.menuItemtext}>{item.itemName} </Text>
                         </TouchableOpacity>
                     )}
                 />
@@ -56,14 +57,31 @@ export default function Home({ navigation}) {
 }
 
 const styles = StyleSheet.create({        
-    botao: {
-      width: 300,
-      height: 42,
-      backgroundColor: "#fff",
-      marginTop: 10,
-      borderRadius: 4,
-      alignItems: "center",
-      justifyContent: "center",
-    }
+    menuItens: {     
+        flexDirection: 'row',   
+        justifyContent: 'center',
+        alignItems: "center",        
+        backgroundColor: '#EA701B',
+        paddingVertical: 10,
+        paddingHorizontal: 10,
+        width: 320,
+        margin: 15,
+        borderRadius: 30,
+    },
+    categoryImage: {
+        flex: 1,        
+        height: 100,
+        width: 100,
+        backgroundColor: "#ccc",
+        borderRadius: 50,
+        borderWidth: 5,
+        borderColor: '#fff',                
+    },
+    menuItemtext: {
+        flex: 2,
+        textAlign: 'center',
+        fontSize: 24,
+        fontWeight: 'bold',
+    },
 });
 
