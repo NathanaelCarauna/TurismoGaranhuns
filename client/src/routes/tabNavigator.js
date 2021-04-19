@@ -10,8 +10,8 @@ const bottomTabNavigator = () => {
     return (
         <tab.Navigator
             tabBarOptions={{ 
-                activeBackgroundColor: 'black',
-                activeTintColor: 'orange',
+                activeBackgroundColor: 'white',
+                activeTintColor: 'black',
                 inactiveBackgroundColor: '#213967',
                 inactiveTintColor: 'white',
                 // tabStyle: {borderColor: 'white', }
