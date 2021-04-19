@@ -24,6 +24,12 @@ export default function Home({ navigation}) {
         if(id == 1){
             navigation.navigate('Parques')
         }
+        if(id == 2){
+            navigation.navigate('Pracas')
+        }
+        if(id == 3){
+            navigation.navigate('Religiao')
+        }
         if(id == 5){            
             const  res = deleteAccount(user.id)            
             console.log(res)
