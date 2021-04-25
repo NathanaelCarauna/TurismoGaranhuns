@@ -32,7 +32,7 @@ module.exports = app => {
             })
         }
         else{
-            return res.status(400).send("Usuário não cadastrado")
+            return res.json({user: null}).send("Usuário não cadastrado")
         }
     }
     return { signin }
