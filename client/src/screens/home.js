@@ -6,7 +6,7 @@ import AuthContext from '../contexts/auth';
 
 
 export default function Home({ navigation}) {
-    const {signOut, deleteAccount, user } = useContext(AuthContext);
+    const {deleteAccount, user } = useContext(AuthContext);
     console.log(user)
     
     const [name, setName] = useState('Turismo APP');
@@ -15,9 +15,6 @@ export default function Home({ navigation}) {
         { itemName: 'Parques', id: '1' },
         { itemName: 'Praças', id: '2' },
         { itemName: 'Religião', id: '3' },
-        // { itemName: 'Editar Usuário', id: '4' },
-        // { itemName: 'Remover Usuário', id: '5' },
-        { itemName: 'Sair', id: '6' },
     ])
 
     function pressHandler(id){
@@ -33,11 +30,7 @@ export default function Home({ navigation}) {
         if(id == 5){            
             const  res = deleteAccount(user.id)            
             console.log(res)
-        }
-        if(id == 6){
-            signOut();
-        }
-
+        }        
     }    
 
     return (
@@ -55,9 +48,6 @@ export default function Home({ navigation}) {
                 />
 
             </View>
-            {/* <View style={global.footer}>
-
-            </View> */}
         </View>
     );
 }
