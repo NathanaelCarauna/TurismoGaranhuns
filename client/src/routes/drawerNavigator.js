@@ -1,5 +1,6 @@
 import React, { useContext } from 'react'
 import { createDrawerNavigator, DrawerContentScrollView, DrawerItem, DrawerItemList } from '@react-navigation/drawer'
+import { Alert } from 'react-native';
 import Home from './tabNavigator';
 import EditUsuario from '../screens/editUsuario'
 import Avatar from '../screens/avatar'
@@ -13,13 +14,27 @@ import AuthContext from '../contexts/auth';
 const Drawer = createDrawerNavigator()
 
 export default DrawerNavigator => {
-    const {signOut} = useContext(AuthContext);
-    return(
+    const { signOut } = useContext(AuthContext);
+    const handleLogout = () => {
+        Alert.alert(
+            "Confirmação de logout",
+            "Tem certeza que deseja sair?",
+            [
+                {
+                    text: "Cancel",
+                    onPress: () => console.log("Cancel Pressed"),
+                    style: "cancel"
+                },
+                { text: "OK", onPress: signOut }
+            ]
+        )
+    }
+    return (
         <Drawer.Navigator drawerContent={props => {
             return (
                 <DrawerContentScrollView {...props}>
                     <DrawerItemList {...props} />
-                    <DrawerItem label='Sair' onPress={signOut} />
+                    <DrawerItem label='Sair' onPress={handleLogout} />
                 </DrawerContentScrollView>
             )
         }}>
