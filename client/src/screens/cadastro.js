@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import React, { useState, useContext} from "react";
+import React, { useState, useContext } from "react";
 import {
   Alert,
   StyleSheet,
@@ -8,74 +8,94 @@ import {
   FlatList,
   TouchableOpacity,
   TextInput,
-  Image
+  Image,
+  Keyboard
 } from "react-native";
+import { Formik } from 'formik';
+import { SignUpSchema } from '../validationSchemas/signUpSchema';
 import AuthContext from '../contexts/auth';
+import { TouchableWithoutFeedback } from "react-native-gesture-handler";
+import { global } from "../styles/global";
 
-export default function Cadastro({navigation}) {
-  const [nome, setNome] = useState('')  
-  const [email, setEmail] = useState('')  
-  const [password, setPassword] = useState('')  
-  const [confirmPassword, setConfirmPassword] = useState('')  
-  
+export default function Cadastro({ navigation }) {
+
   const { signed, user, signUp } = useContext(AuthContext);
-  
-
-  function handleSignUp() {
-    let canSignUp = true
-    if(!email){
-      console.log('O campo Email é necessário')
-      canSignUp = false
-    }
-    if(!password){
-      console.log('É preciso digitar uma senha')
-      canSignUp = false
-    }
-    if(!(password === confirmPassword)){
-      console.log('As senhas não coincidem')
-      canSignUp = false
-    }
-    if(canSignUp){
-      signUp(nome, email, password);
-    }
-  }
 
   return (
     <View style={styles.container}>
-      <Image source={require('../../assets/logo.png')} style={styles.logo}/> 
-      <View style={styles.formContainer}>
-        <TextInput 
-          style={styles.input} 
-          placeholder="Digite seu nome" 
-          value={nome}
-          onChangeText={nome => setNome(nome)}/>
+      <Formik
+        initialValues={{ nome: '', email: '', password: '', confirmPassword: '' }}
+        validationSchema={SignUpSchema}
+        onSubmit={(values, actions) => {
+          signUp(values.nome, values.email, values.password)
+        }}
+      >
+        {(props) => (
+          <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+            <View style={styles.formContainer}>
+              <Image source={require('../../assets/logo.png')} style={styles.logo} />
+              <TextInput
+                style={styles.input}
+                placeholder="Digite seu nome"
+                onChangeText={props.handleChange('nome')}
+                value={props.values.nome}
+                onBlur={props.handleBlur('nome')}
+              />
+              {props.touched.nome && props.errors.nome
+                ? <Text style={global.errorText}>{props.touched.nome && props.errors.nome}</Text>
+                : null
+              }
 
-        <TextInput 
-          style={styles.input} 
-          placeholder="Digite seu email" 
-          value={email}
-          onChangeText={email => setEmail(email)}/>
-          
-        <TextInput 
-          style={styles.input} 
-          secureTextEntry={true} 
-          placeholder="Digite uma senha"
-          value={password}
-          onChangeText={password => setPassword(password)}/>
-        
-        <TextInput 
-          style={styles.input} 
-          secureTextEntry={true} 
-          placeholder="Confirme sua senha"
-          value={confirmPassword}
-          onChangeText={confirmPassword => setConfirmPassword(confirmPassword)}/>
+              <TextInput
+                style={styles.input}
+                placeholder="Digite seu email"
+                value={props.values.email}
+                onChangeText={props.handleChange('email')}
+                onBlur={props.handleBlur('email')}
+                keyboardType="email-address"
+              />
+              {props.touched.email && props.errors.email
+                ? <Text style={global.errorText}>{props.touched.email && props.errors.email}</Text>
+                : null
+              }
 
-        <TouchableOpacity onPress={handleSignUp}>
-          <View style={styles.botaoEntrar}>
-            <Text style={styles.botaoText}>Entrar</Text>
-          </View>
-        </TouchableOpacity>
-      </View>
+              <TextInput
+                style={styles.input}
+                secureTextEntry={true}
+                placeholder="Digite uma senha"
+                value={props.values.password}
+                onChangeText={props.handleChange('password')}
+                onBlur={props.handleBlur('password')}
+                secureTextEntry
+              />
+              {props.touched.password && props.errors.password
+                ? <Text style={global.errorText}>{props.touched.password && props.errors.password}</Text>
+                : null
+              }
+
+              <TextInput
+                style={styles.input}
+                secureTextEntry={true}
+                placeholder="Confirme sua senha"
+                value={props.values.confirmPassword}
+                onChangeText={props.handleChange('confirmPassword')}
+                onBlur={props.handleBlur('confirmPassword')}
+                secureTextEntry
+              />
+              {props.touched.confirmPassword && props.errors.confirmPassword
+                ? <Text style={global.errorText}>{props.touched.confirmPassword && props.errors.confirmPassword}</Text>
+                : null
+              }
+
+              <TouchableOpacity onPress={props.handleSubmit} style={styles.botaoEntrar}>
+                <View >
+                  <Text style={styles.botaoText}>Entrar</Text>
+                </View>
+              </TouchableOpacity>
+            </View>
+          </TouchableWithoutFeedback>
+        )}
+      </Formik>
     </View>
   );
 }
@@ -130,12 +150,14 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   logo: {
-    width: 80,    
+    width: 80,
     height: 80,
     marginBottom: 35,
   },
   formContainer: {
-
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
   },
   botaoText: {
 

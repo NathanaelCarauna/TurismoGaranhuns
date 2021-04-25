@@ -62,7 +62,7 @@ export default function Login() {
                 placeholder="Digite sua senha"
                 onChangeText={props.handleChange('password')}
                 value={props.values.password}
-                onBlur={props.handleBlur('email')}
+                onBlur={props.handleBlur('password')}
                 secureTextEntry
               />
               {props.touched.password && props.errors.password
