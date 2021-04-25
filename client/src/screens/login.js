@@ -19,22 +19,30 @@ import { global } from "../styles/global";
 
 export default function Login() {
 
-  const { signIn } = useContext(AuthContext);
+  const [ invalidLoginText, setInvalidLoginText] = useState('');
+  const { user, signIn } = useContext(AuthContext);
 
   return (
     <View style={styles.container}>
       <Formik
         initialValues={{ email: '', password: '' }}
-        validationSchema={LoginSchema}
-        onSubmit={(values) => {
-          // console.log(values)
-          signIn(values.email, values.password)
+        validationSchema={LoginSchema}               
+        onSubmit={(values, actions) => {          
+          signIn(values.email, values.password)                    
+          if (!user) {
+            Alert.alert('Dados não encontrados', 'Email ou senha inválidos')            
+          }
         }}
       >
         {(props) => (
           <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
             <View style={styles.formContainer}>
               <Image source={require('../../assets/logo.png')} style={styles.logo} />
+              
+              {invalidLoginText
+                ? <Text style={global.errorText}>{invalidLoginText}</Text>
+                : null
+              }
               <TextInput
                 style={styles.input}
                 placeholder="Digite seu email"
@@ -61,7 +69,7 @@ export default function Login() {
                 ? <Text style={global.errorText}>{props.touched.password && props.errors.password}</Text>
                 : null
               }
-            
+
               <TouchableOpacity onPress={props.handleSubmit} style={styles.botaoEntrar}>
                 <View>
                   <Text style={styles.botaoText}>Entrar</Text>

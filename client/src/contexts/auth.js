@@ -14,7 +14,7 @@ const AuthContext = createContext({
 export const AuthProvider = ({ children }) => {
     const [loading, setLoading] = useState(null)
     const [user, setUser] = useState(null);
-
+        
     useEffect(() => {
         setLoading(true)
         async function loadStorageData(){
@@ -52,6 +52,9 @@ export const AuthProvider = ({ children }) => {
             await auth.signIn(email, password)
                 .then(response => {
                     console.log(response.data.user)
+                    if(response.data.user == null){
+                        return false;
+                    }
                     if(response.data.user){                    
                         setUser(response.data.user);
                         AsyncStorage.setItem('@TGAuth:user', JSON.stringify(response.data.user));
@@ -59,16 +62,14 @@ export const AuthProvider = ({ children }) => {
                     if(response.data.token){
                         api.defaults.headers.Authorization= `Bearer ${response.data.token}`
                         AsyncStorage.setItem('@TGAuth:token', response.data.token);
-                    }    
-                    return(true)            
+                    }                         
+                    
                 })
                 .catch(err => {
-                    console.log(err);
-                    return false;
+                    console.log(err);                    
                 });                
         }catch(e){
-            console.log(e);
-            return false;
+            console.log(e);            
         }
     }
 
