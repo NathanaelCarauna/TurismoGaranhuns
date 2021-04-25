@@ -12,48 +12,57 @@ import {
 } from "react-native";
 import { Formik } from 'formik';
 import AuthContext from '../contexts/auth';
+import { LoginSchema } from '../validationSchemas/loginSchema';
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
+import { global } from "../styles/global";
 
 
 export default function Login() {
 
-  // const [email, setEmail] = useState('')
-  // const [password, setPassword] = useState('')
-
-  const { signed, user, signIn } = useContext(AuthContext);
-
-  function handleSignIn() {
-    signIn(email, password);
-  }
+  const { signIn } = useContext(AuthContext);
 
   return (
     <View style={styles.container}>
       <Formik
         initialValues={{ email: '', password: '' }}
+        validationSchema={LoginSchema}
         onSubmit={(values) => {
-          signIn( values.email, values.password)
+          // console.log(values)
+          signIn(values.email, values.password)
         }}
       >
-        {(formikProps) => (
+        {(props) => (
           <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
             <View style={styles.formContainer}>
               <Image source={require('../../assets/logo.png')} style={styles.logo} />
               <TextInput
                 style={styles.input}
                 placeholder="Digite seu email"
-                onChangeText={formikProps.handleChange('email')}
-                value={formikProps.values.email}
+                onChangeText={props.handleChange('email')}
+                value={props.values.email}
+                onBlur={props.handleBlur('email')}
+                keyboardType="email-address"
               />
+              {props.touched.email && props.errors.email
+                ? <Text style={global.errorText}>{props.touched.email && props.errors.email}</Text>
+                : null
+              }
 
               <TextInput
                 style={styles.input}
                 secureTextEntry={true}
                 placeholder="Digite sua senha"
-                onChangeText={formikProps.handleChange('password')}
-                value={formikProps.values.password}
+                onChangeText={props.handleChange('password')}
+                value={props.values.password}
+                onBlur={props.handleBlur('email')}
+                secureTextEntry
               />
-
-              <TouchableOpacity onPress={formikProps.handleSubmit} style={styles.botaoEntrar}>
+              {props.touched.password && props.errors.password
+                ? <Text style={global.errorText}>{props.touched.password && props.errors.password}</Text>
+                : null
+              }
+            
+              <TouchableOpacity onPress={props.handleSubmit} style={styles.botaoEntrar}>
                 <View>
                   <Text style={styles.botaoText}>Entrar</Text>
                 </View>
@@ -122,7 +131,7 @@ const styles = StyleSheet.create({
     marginBottom: 35,
   },
   formContainer: {
-    flex:1,
+    flex: 1,
     justifyContent: "center",
     alignItems: "center",
 

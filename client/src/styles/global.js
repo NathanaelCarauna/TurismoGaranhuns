@@ -25,4 +25,10 @@ export const global = StyleSheet.create({
         borderTopRightRadius: 90,
     },
     // Main end
+    errorText: {
+        color: '#EA701B',
+        fontWeight: 'bold',
+        marginBottom: 10,
+        marginTop: 6
+    }
 })
