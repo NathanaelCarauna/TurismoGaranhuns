@@ -1,20 +1,25 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useContext, useState } from "react";
-import { Alert,
-        StyleSheet,
-        Text,
-        View,
-        TouchableOpacity,
-        TextInput,
-        Image } from "react-native";
+import {
+  Alert,
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  TextInput,
+  Image,
+  Keyboard
+} from "react-native";
+import { Formik } from 'formik';
 import AuthContext from '../contexts/auth';
+import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 
 
 export default function Login() {
-  
-  const [email, setEmail] = useState('')  
-  const [password, setPassword] = useState('')  
-  
+
+  // const [email, setEmail] = useState('')
+  // const [password, setPassword] = useState('')
+
   const { signed, user, signIn } = useContext(AuthContext);
 
   function handleSignIn() {
@@ -23,27 +28,41 @@ export default function Login() {
 
   return (
     <View style={styles.container}>
-      <Image source={require('../../assets/logo.png')} style={styles.logo}/> 
-      <View style={styles.formContainer}>
-        <TextInput 
-          style={styles.input} 
-          placeholder="Digite seu email" 
-          value={email}
-          onChangeText={email => setEmail(email)}/>
-          
-        <TextInput 
-          style={styles.input} 
-          secureTextEntry={true} 
-          placeholder="Digite sua senha"
-          value={password}
-          onChangeText={password => setPassword(password)}/>
+      <Formik
+        initialValues={{ email: '', password: '' }}
+        onSubmit={(values) => {
+          signIn( values.email, values.password)
+        }}
+      >
+        {(formikProps) => (
+          <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+            <View style={styles.formContainer}>
+              <Image source={require('../../assets/logo.png')} style={styles.logo} />
+              <TextInput
+                style={styles.input}
+                placeholder="Digite seu email"
+                onChangeText={formikProps.handleChange('email')}
+                value={formikProps.values.email}
+              />
 
-        <TouchableOpacity onPress={handleSignIn}>
-          <View style={styles.botaoEntrar}>
-            <Text style={styles.botaoText}>Entrar</Text>
-          </View>
-        </TouchableOpacity>
-      </View>
+              <TextInput
+                style={styles.input}
+                secureTextEntry={true}
+                placeholder="Digite sua senha"
+                onChangeText={formikProps.handleChange('password')}
+                value={formikProps.values.password}
+              />
+
+              <TouchableOpacity onPress={formikProps.handleSubmit} style={styles.botaoEntrar}>
+                <View>
+                  <Text style={styles.botaoText}>Entrar</Text>
+                </View>
+              </TouchableOpacity>
+            </View>
+          </TouchableWithoutFeedback>
+        )}
+
+      </Formik>
     </View>
   );
 }
@@ -98,11 +117,14 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   logo: {
-    width: 80,    
+    width: 80,
     height: 80,
     marginBottom: 35,
   },
   formContainer: {
+    flex:1,
+    justifyContent: "center",
+    alignItems: "center",
 
   },
   botaoText: {
