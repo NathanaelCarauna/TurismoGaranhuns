@@ -22,15 +22,21 @@ export default function Login() {
   const [ invalidLoginText, setInvalidLoginText] = useState('');
   const { user, signIn } = useContext(AuthContext);
 
+  const eraseInvalidLogin = () => {
+    setInvalidLoginText('');
+  }
+  const invalidLogin = () => {
+    setInvalidLoginText('Email ou senha inválidos')
+  }
   return (
     <View style={styles.container}>
       <Formik
         initialValues={{ email: '', password: '' }}
         validationSchema={LoginSchema}               
         onSubmit={(values, actions) => {          
-          signIn(values.email, values.password)                    
-          if (!user) {
-            Alert.alert('Dados não encontrados', 'Email ou senha inválidos')            
+          signIn(values.email, values.password)    
+          if(!user){
+            invalidLogin();                         
           }
         }}
       >
@@ -46,6 +52,7 @@ export default function Login() {
               <TextInput
                 style={styles.input}
                 placeholder="Digite seu email"
+                onTouchStart={eraseInvalidLogin}
                 onChangeText={props.handleChange('email')}
                 value={props.values.email}
                 onBlur={props.handleBlur('email')}
@@ -61,6 +68,7 @@ export default function Login() {
                 secureTextEntry={true}
                 placeholder="Digite sua senha"
                 onChangeText={props.handleChange('password')}
+                onTouchStart={eraseInvalidLogin}
                 value={props.values.password}
                 onBlur={props.handleBlur('password')}
                 secureTextEntry
