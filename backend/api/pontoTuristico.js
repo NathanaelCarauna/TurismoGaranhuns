@@ -10,17 +10,19 @@ module.exports = app => {
             .catch(err => res.status(400).json(err))
     }
     const getPontoTuristico = (req, res) => {
-        app.db('pontosTuristicos')
-        .where({id: req.params.id})
-        .first()
-        .then(endereco => {
-            if(endereco){
-                return res.status(200).json(endereco);
-            }else{
-                return res.status(400).send();
-            }
-        })
-        .catch(err => res.status(500).json(err))
+        app.db('pontosTuristicos as pt')
+            .join('endereco as e', 'e.id', 'pt.id_endereco')            
+            .select('e.id', 'e.rua', 'e.bairro', 'e.numero', 'pt.nome',
+                    'pt.descricao')
+            .where({"pt.id": req.params.id})            
+            .then(endereco => {
+                if(endereco){
+                    return res.status(200).json(endereco);
+                }else{
+                    return res.status(400).send();
+                }
+            })
+            .catch(err => res.status(500).json(err))
     }    
 
     const removePontoTuristico = (req, res) =>{
