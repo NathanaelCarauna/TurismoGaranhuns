@@ -1,16 +1,19 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
 import { Alert,StyleSheet, Text, View, FlatList, TouchableOpacity, TextInput, Image } from 'react-native';
+import { Ionicons } from '@expo/vector-icons'
 
 export default ({func}) => {
     
     return (
         <View style={styles.container}>
             <TouchableOpacity onPress={func}>
-                <Image source={require('../../assets/icones/sininho.png')} style={styles.sino} />
+                <Ionicons name={'notifications'} size={25} color={'white'} style={styles.sino}/>
+                {/* <Image source={require('../../assets/icones/sininho.png')} style={styles.sino} /> */}
             </TouchableOpacity>
             <TouchableOpacity onPress={func}>
-                <Image source={require('../../assets/icones/lupa.png')} style={styles.lupa} />
+                <Ionicons name={'search'} size={25} color={'white'} style={styles.lupa}/>
+                {/* <Image source={require('../../assets/icones/lupa.png')} style={styles.lupa} /> */}
             </TouchableOpacity>
         </View>
     )
