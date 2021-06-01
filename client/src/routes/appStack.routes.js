@@ -6,6 +6,7 @@ import Pracas from '../screens/Pracas';
 import Religao from '../screens/Religiao';
 import { Image, StyleSheet } from 'react-native';
 import MenuLateralIcon from '../components/MenuLateralIcon';
+import HeaderRightSide from '../components/HeaderRightSide';
 
 const AppStack = createStackNavigator();
 
@@ -16,9 +17,9 @@ export default function AppRoutes({ navigation}) {
     }
     return (
     <AppStack.Navigator
-        screenOptions={{
-            // <Image source={require('../../assets/logo.png')} style={styles.logo} />
-            headerLeft: () => <MenuLateralIcon func={handleDrawer} abc={()=>ausdnas}/>,
+        screenOptions={{            
+            headerLeft: () => <MenuLateralIcon func={handleDrawer}/>,
+            headerRight: () => <HeaderRightSide/>,
             headerStyle: {
                 backgroundColor: "#213967",
                 height: 70,
