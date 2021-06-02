@@ -28,14 +28,25 @@ export default DrawerNavigator => {
         )
     }
     return (
-        <Drawer.Navigator drawerContent={props => {
-            return (
-                <DrawerContentScrollView {...props}>
-                    <DrawerItemList {...props} />
-                    <DrawerItem label='Sair' onPress={handleLogout} />
-                </DrawerContentScrollView>
-            )
-        }}>
+        <Drawer.Navigator 
+            drawerType={'back'}
+            drawerStyle={{ 
+                width: '60%',
+                backgroundColor: 'white' 
+            }}
+            drawerContent={props => {
+                return (
+                    <DrawerContentScrollView {...props}>
+                        <DrawerItemList {...props} />
+                        <DrawerItem label='Sair' onPress={handleLogout} />
+                    </DrawerContentScrollView>
+                )
+            }}
+            drawerContentOptions={{ 
+                activeTintColor: 'black',
+                activeBackgroundColor: '#f4a261'
+             }}
+        >
             <Drawer.Screen name="Home" component={Home} />
             <Drawer.Screen name="Usuário" component={userStackRoutes} />
             <Drawer.Screen name="Avatar" component={avatarStackRoutes} />
