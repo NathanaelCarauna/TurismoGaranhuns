@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
-import { Text, View, FlatList, TouchableOpacity, StyleSheet } from 'react-native';
+import { Text, View, FlatList, TouchableOpacity, StyleSheet, Image } from 'react-native';
 import { global } from '../styles/global';
-import Header from '../components/header';
+import {images} from '../../assets/index';
 import AuthContext from '../contexts/auth';
 
 
@@ -12,9 +12,9 @@ export default function Home({ navigation}) {
     const [name, setName] = useState('Turismo APP');
 
     const [menuItens, setMenuItens] = useState([
-        { itemName: 'Parques', id: '1' },
-        { itemName: 'Praças', id: '2' },
-        { itemName: 'Religião', id: '3' },
+        { itemName: 'Parques', image: images.parque,'id': '1'},
+        { itemName: 'Praças', image: images.parques, id: '2' },
+        { itemName: 'Religião', image: images.construcao1, id: '3' },
     ])
 
     function pressHandler(id){
@@ -40,8 +40,8 @@ export default function Home({ navigation}) {
                     keyExtractor={(item) => item.id}
                     data={menuItens}
                     renderItem={({ item }) => (
-                        <TouchableOpacity style={styles.menuItens} onPress={() => pressHandler(item.id)}>
-                            <View style={styles.categoryImage}></View>
+                        <TouchableOpacity style={styles.menuItens} onPress={() => pressHandler(item.id)}>                            
+                            <Image source={item.image} style={styles.categoryImage}/>
                             <Text style={styles.menuItemtext}>{item.itemName} </Text>
                         </TouchableOpacity>
                     )}
@@ -65,12 +65,12 @@ const styles = StyleSheet.create({
     },
     categoryImage: {
         flex: 1,        
-        height: 100,
-        width: 100,
-        backgroundColor: "#ccc",
-        borderRadius: 50,
-        borderWidth: 5,
-        borderColor: '#fff',                
+        height: 110,
+        width: 110,
+        // backgroundColor: "#ccc",
+        // borderRadius: 50,
+        // borderWidth: 5,
+        // borderColor: '#fff',                
     },
     menuItemtext: {
         flex: 2,
