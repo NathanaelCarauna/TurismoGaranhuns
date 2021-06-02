@@ -7,6 +7,7 @@ import Religao from '../screens/Religiao';
 import { Image, StyleSheet } from 'react-native';
 import MenuLateralIcon from '../components/MenuLateralIcon';
 import HeaderRightSide from '../components/HeaderRightSide';
+import infoPonto from '../screens/infoPonto';
 
 const AppStack = createStackNavigator();
 
@@ -33,5 +34,6 @@ export default function AppRoutes({ navigation}) {
         <AppStack.Screen name="Parques" component={Parques}/>
         <AppStack.Screen name="Pracas" component={Pracas}/>
         <AppStack.Screen name="Religiao" component={Religao}/>
+        <AppStack.Screen name="InfoPonto" component={infoPonto}/>
     </AppStack.Navigator>
 )}

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import {View, Text, StyleSheet, FlatList, TouchableOpacity} from 'react-native';
 
 
-export default function QrScreen(){
+export default function Parques({ navigation}){
     const [menuItens, setMenuItens] = useState([
         { itemName: 'Parque Euclides Dourado', id: '1' },
         { itemName: 'Parque 2', id: '2' },
@@ -10,6 +10,9 @@ export default function QrScreen(){
 
     ])
 
+    const openInfoPage = () => {
+        navigation.navigate('InfoPonto')
+    }
     return(
         <View style={styles.container}>            
             <View style={styles.body}>
@@ -19,7 +22,7 @@ export default function QrScreen(){
                     keyExtractor={(item) => item.id}
                     data={menuItens}
                     renderItem={({ item }) => (
-                        <TouchableOpacity style={styles.avatarContainer} onPress={() => {}}>
+                        <TouchableOpacity style={styles.avatarContainer} onPress={openInfoPage}>
                             <View style={styles.placeImage}></View>
                             <Text style={styles.menuItemtext}>{item.itemName}</Text>
                         </TouchableOpacity>
