@@ -2,12 +2,12 @@ import React, { useContext } from 'react'
 import { createDrawerNavigator, DrawerContentScrollView, DrawerItem, DrawerItemList } from '@react-navigation/drawer'
 import { Alert } from 'react-native';
 import Home from './tabNavigator';
-import Avatar from '../screens/avatar'
 import Configuration from '../screens/configuration'
 import Missions from '../screens/missions'
 import Conquistas from '../screens/conquistas'
 import AuthContext from '../contexts/auth';
 import userStackRoutes from './userStack.routes';
+import avatarStackRoutes from './avatarStack.routes';
 
 
 
@@ -40,7 +40,7 @@ export default DrawerNavigator => {
         }}>
             <Drawer.Screen name="Home" component={Home} />
             <Drawer.Screen name="Usuário" component={userStackRoutes} />
-            <Drawer.Screen name="Avatar" component={Avatar} />
+            <Drawer.Screen name="Avatar" component={avatarStackRoutes} />
             <Drawer.Screen name="Missões" component={Missions} />
             <Drawer.Screen name="Conquistas" component={Conquistas} />
             <Drawer.Screen name="Configurações" component={Configuration} />
