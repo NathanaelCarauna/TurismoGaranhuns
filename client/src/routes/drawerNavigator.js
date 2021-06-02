@@ -3,11 +3,11 @@ import { createDrawerNavigator, DrawerContentScrollView, DrawerItem, DrawerItemL
 import { Alert } from 'react-native';
 import Home from './tabNavigator';
 import Configuration from '../screens/configuration'
-import Conquistas from '../screens/conquistas'
 import AuthContext from '../contexts/auth';
 import userStackRoutes from './userStack.routes';
 import avatarStackRoutes from './avatarStack.routes';
 import missionsStackRoutes from './missionsStack.routes';
+import conquestStackRoutes from './conquestStack.routes';
 
 
 
@@ -42,7 +42,7 @@ export default DrawerNavigator => {
             <Drawer.Screen name="Usuário" component={userStackRoutes} />
             <Drawer.Screen name="Avatar" component={avatarStackRoutes} />
             <Drawer.Screen name="Missões" component={missionsStackRoutes} />
-            <Drawer.Screen name="Conquistas" component={Conquistas} />
+            <Drawer.Screen name="Conquistas" component={conquestStackRoutes} />
             <Drawer.Screen name="Configurações" component={Configuration} />
         </Drawer.Navigator>
     )
