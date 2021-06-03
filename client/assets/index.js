@@ -4,4 +4,6 @@ export const images = {
     construcao2: require('./icones/construçoes.png'),
     parque: require('./icones/parque.png'),
     parques: require('./icones/parques.png'),
+    localIcon: require('./icones/localIcon.png'),
+    relogioDasFlores: require('./relogio-de-flores.jpg')
 }
